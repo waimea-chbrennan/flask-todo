@@ -45,7 +45,7 @@ The database used for this demo has the following schema:
 CREATE TABLE `things` (
     `id`         INTEGER PRIMARY KEY AUTOINCREMENT,
     `name`       TEXT    NOT NULL,
-    `price`      INTEGER NOT NULL DEFAULT 0
+    `priority`      INTEGER NOT NULL DEFAULT 0
 );
 ```
 

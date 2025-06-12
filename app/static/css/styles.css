@@ -1,19 +1,38 @@
 /*=====================================================
   User stylesheet - Building upon PicoCSS
 =====================================================*/
-
-
-/* ABOUT PAGE -------------------------------------------- */
-
-#tech-stack {
+.task-container {
     display: flex;
-    gap: 1rem;
-    align-items: flex-start;
+    align-items: center;
 }
 
-#tech-stack article {
-    flex: 1;
+
+.task {
+    display: flex;
+    margin-right: auto;
+    align-items: center;
 }
+
+
+
+.task h4 {
+    padding-right: 1rem;
+    margin: 0;
+}
+
+.task p {
+    margin: 0;
+}
+
+.task-actions {
+    display: flex;
+   
+}
+
+
+
+
+
 
 
 /* MESSAGES -------------------------------------------- */

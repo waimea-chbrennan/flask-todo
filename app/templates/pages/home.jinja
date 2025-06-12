@@ -1,6 +1,5 @@
 {#=====================================================
-  Home page
-  - Hero style greeting banner
+  Things list page
   - List of things passed in as 'things' array
   - Form for adding a new thing
 =====================================================#}
@@ -10,29 +9,76 @@
 
 {% block title %}
 
-    Flask Demo
+    To Do List
 
 {% endblock %}
 
 
 {% block content %}
 
-    <h1>Flask Demo App with Turso DB</h1>
+    <h1>Your Tasks!</h1>
 
-    <p>This is a simple Flask app that connects to a Turso database to save and retrieve data. This can be used as the basis of your web app.</p>
 
-    <p>It includes...</p>
+   
 
-    <ul>
-        <li>Example routes</li>
-        <li>Example static pages</li>
-        <li>Missing page and server error pages</li>
-        <li>DB connection and error handling</li>
-        <li>Example CRUD actions: Create and Delete</li>
-        <li>Flash messages for information</li>
-    </ul>
+    
+        {% for task in tasks %}
+            <article class="task-container">
+                <div class="task">
+                    <h4>{{ task.priority }}</h4>
+                    <p>{{ task.name }}</p>
 
-    <a href="/things" role="button">Go to the Things...</a>
+                </div>
+
+                <div class="task-actions">
+                    <a role="button" href="/delete/{{task.id}}">Delete</a>
+                </div>
+            </article>
+        {% else %}
+
+            <p>None!</p>
+
+        {% endfor %}
+    
+
+   
+
+
+    <article>
+
+        <h3>Add a New Task!</h3>
+
+        <form action="/add" method="POST">
+
+            <fieldset role="group">
+                <input
+                    type="text"
+                    name="name"
+                    placeholder="Name of new task"
+                    required
+                >
+
+                <input
+                    list="priorities"
+                    name="priority"
+                    min="1"
+                    max="5"
+                    placeholder="Priority"
+                    required
+                >
+                <datalist id="priorities">
+                    <option value="1">
+                    <option value="2">
+                    <option value="3">
+                    <option value="4">
+                    <option value="5">
+                </datalist>
+
+
+                <button>Add!</button>
+            </fieldset>
+        </form>
+    </article>
 
 {% endblock %}
 
