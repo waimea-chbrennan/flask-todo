@@ -11,29 +11,40 @@
     display: flex;
     margin-right: auto;
     align-items: center;
+    line-height: 1;
 }
-
-
-
-.task h4 {
+.task * {
     padding-right: 1rem;
     margin: 0;
+
 }
 
-.task p {
-    margin: 0;
-}
-
-.task-actions {
-    display: flex;
-   
+a {
+    font-size: 32px;
+    text-decoration: none;
 }
 
 
+.task-container .priority-5 h4 {
+    color: var(--pico-color-red-450);
+}
 
+.priority-4 h4 {
+    color: var(--pico-color-orange-450);
+} 
 
+.priority-3 h4 {
+    color: var(--pico-color-yellow-200);
+}
 
+.priority-2 h4 {
+    color: var(--pico-color-yellow-100);
+}
 
+.priority-1 h4 {
+    color: var(--pico-color-green-100);
+}
+ 
 
 /* MESSAGES -------------------------------------------- */
 

@@ -27,10 +27,11 @@ register_error_handlers(app)
 def index():
     with connect_db() as client:
         # Get all the things from the DB
-        sql = "SELECT id, name, priority FROM tasks ORDER BY name ASC"
+        sql = "SELECT id, name, priority, complete FROM tasks ORDER BY priority DESC"
         result = client.execute(sql)
         tasks = result.rows
 
+        print(tasks)
         # And show them on the page
         return render_template("pages/home.jinja", tasks=tasks)
 
@@ -48,7 +49,7 @@ def add_a_thing():
     name  = request.form.get("name")
     priority = request.form.get("priority")
 
-    # Sanitise the inputs
+    # Sanitize the inputs
     name = html.escape(name)
     priority = html.escape(priority)
 
@@ -79,3 +80,17 @@ def delete_a_task(id):
         return redirect("/")
 
 
+
+#-----------------------------------------------------------
+# Route for toggling whether a task is completed
+#-----------------------------------------------------------
+@app.get("/complete/<int:id>")
+def completed_task(id):
+    with connect_db() as client:
+        # Delete the task from the DB
+        sql = """UPDATE tasks 
+            SET complete = (CASE WHEN complete = 0 THEN 1 ELSE 0 END)
+            WHERE id=?"""
+        values = [id]
+        client.execute(sql, values)
+        return redirect("/")

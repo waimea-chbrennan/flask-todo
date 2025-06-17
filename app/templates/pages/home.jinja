@@ -16,24 +16,31 @@
 
 {% block content %}
 
-    <h1>Your Tasks!</h1>
-
-
-   
-
-    
+    <h1>Your Tasks!</h1>    
         {% for task in tasks %}
             <article class="task-container">
-                <div class="task">
-                    <h4>{{ task.priority }}</h4>
-                    <p>{{ task.name }}</p>
+                <span class="task priority-{{task.priority}}">
+                {% if task.complete==1 %}
+                        <a id="complete-button" href="/complete/{{task.id}}">&#9745;</a>
+                        <s> <h4>{{ task.priority }}</h4> </s>
+                        <s> <p>{{ task.name }}</p> </s>    
+                    {% else %}
+                        <a id="complete-button"  href="/complete/{{task.id}}">&#9744;</a>
+                        <h4>{{ task.priority }}</h4>
+                        <p>{{ task.name }}</p>
+                    {% endif %}
+                </span>
 
-                </div>
-
-                <div class="task-actions">
-                    <a role="button" href="/delete/{{task.id}}">Delete</a>
-                </div>
+                <span class="task-actions">
+                    {% if task.complete==1 %}
+                        <a href="/delete/{{task.id}}">&#9003;</a>
+                        {# Only completed tasks can be deleted #}
+                    {% endif %}
+                </span>
             </article>
+
+
+
         {% else %}
 
             <p>None!</p>
